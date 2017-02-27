@@ -5,10 +5,10 @@ import lightswitch
 
 #test 1 - does the program access the file correctly. 
 
-def parse_file_test(file, output):
+def parse_file_test(file, commands, grid_size):
     try: 
         result = lightswitch.main.parse_file(file)
-        if result == output: 
+        if result[0] == commands and result[1] == grid_size:
             print("File Handler Test Passed")
         else: 
             print("You have an error in your file handler function")
@@ -79,9 +79,12 @@ def check_lights_test(grid, list_on, list_off):
 ####################################################
 #test calls
 
-#parse_file_test()
-
 #sample data
+sample_grid_size = 25
+sample_commands_list = ['turn on 0, 0 through 5, 5', 'turn off 0, 0 through 5, 5', 'turn on 0, 0, through 2, 2', 
+                        'switch 0, 0 through 5, 5', 'turn off 2, 2 through 15, 15', 'turn on 0, 0 through 5, 5',
+                        'turn off -10, -10 through 3, 3']
+sample_file = 'file1.txt'
 sample_grid = {'0, 0': False, '0, 1': False, '0, 2': False, '0, 3': False, '0, 4': False, 
                '1, 0': False, '1, 1': False, '1, 2': False, '1, 3': False, '1, 4': False,
                '2, 0': False, '2, 1': False, '2, 2': False, '2, 3': False, '2, 4': False, 
@@ -103,6 +106,7 @@ lights_off_sample = ['0, 4', '1, 4', '2, 4', '3, 4', '4, 0', '4, 1', '4, 2', '4,
 #create grid
 create_grid_test(sample_grid, 25)
 #parse commands
+parse_file_test(sample_file, sample_commands_list, sample_grid_size)
 parse_command_test(sample_line_1, "turn on", sample_coordinates)
 execute_command_test("turn on", sample_coordinates, sample_grid_33)
 count_lights_test(sample_grid_33, 16)
