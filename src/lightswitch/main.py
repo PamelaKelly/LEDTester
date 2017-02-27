@@ -1,5 +1,18 @@
+from pathlib import Path
+import os
 def parse_file(file):
-    pass
+    os.chdir('../tests')
+    command_list = []
+    fh = open(file)
+    grid_size = fh.readline().strip()
+    while True: 
+        line = fh.readline()
+        if not line: 
+            break
+        words = line.split()
+        if words[0] + words[1] == "turnon" or words[0] + words[1] == "turnoff" or words[0] == "switch":
+            command_list.append(line.strip())
+    return command_list, grid_size
 
 def create_grid():
     pass

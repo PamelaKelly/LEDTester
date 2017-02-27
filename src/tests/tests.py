@@ -1,14 +1,13 @@
 """This is the set of tests - written in advance of the program 
 to test the accuracy and functionality of the lightswitch program"""
-
 import lightswitch
-
+from lightswitch import main
 #test 1 - does the program access the file correctly. 
 
-def parse_file_test(file, commands, grid_size):
+def parse_file_test(file, commands_list, grid_size):
     try: 
-        result = lightswitch.main.parse_file(file)
-        if result[0] == commands and result[1] == grid_size:
+        result = main.parse_file(file)
+        if result[0] == commands_list and result[1] == grid_size:
             print("File Handler Test Passed")
         else: 
             print("You have an error in your file handler function")
@@ -69,7 +68,7 @@ def count_lights_test(grid, count):
 def check_lights_test(grid, list_on, list_off):
     try: 
         result = lightswitch.main.check_lights(grid)
-        if result[0] == count_on and result[1] == count_off:
+        if result[0] == list_on and result[1] == list_off:
             print("Lights On Test Passed")
         else: 
             print("You have an error in your check lights test")
@@ -80,7 +79,7 @@ def check_lights_test(grid, list_on, list_off):
 #test calls
 
 #sample data
-sample_grid_size = 25
+sample_grid_size = '5'
 sample_commands_list = ['turn on 0, 0 through 5, 5', 'turn off 0, 0 through 5, 5', 'turn on 0, 0, through 2, 2', 
                         'switch 0, 0 through 5, 5', 'turn off 2, 2 through 15, 15', 'turn on 0, 0 through 5, 5',
                         'turn off -10, -10 through 3, 3']
@@ -103,10 +102,10 @@ lights_on_sample = ['0, 0', '0, 1', '0, 2', '0, 3', '1, 0', '1, 1', '1, 2', '1, 
 lights_off_sample = ['0, 4', '1, 4', '2, 4', '3, 4', '4, 0', '4, 1', '4, 2', '4, 3', '4, 4']
 
 #test calls
+parse_file_test(sample_file, sample_commands_list, sample_grid_size)
 #create grid
 create_grid_test(sample_grid, 25)
 #parse commands
-parse_file_test(sample_file, sample_commands_list, sample_grid_size)
 parse_command_test(sample_line_1, "turn on", sample_coordinates)
 execute_command_test("turn on", sample_coordinates, sample_grid_33)
 count_lights_test(sample_grid_33, 16)
