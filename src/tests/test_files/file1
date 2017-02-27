@@ -1,0 +1,10 @@
+9
+turn on 0, 0 through 9, 9
+change 0, 0 through 9, 9
+turn off 0, 0 through 9, 9
+turn on 0, 0, through 4, 4
+switch 0, 0 through 9, 9
+off 0, 0 through 9, 9
+turn off 5, 5 through 15, 15
+turn on 0, 0 through 9, 9
+turn off -10, -10 through 5, 9

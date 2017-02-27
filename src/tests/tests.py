@@ -66,7 +66,7 @@ def count_lights_test(grid, count):
 
 #test 6 - does the program correctly identify the lights that are on
 
-def check_lights_test(grid, count_on, count_off):
+def check_lights_test(grid, list_on, list_off):
     try: 
         result = lightswitch.main.check_lights(grid)
         if result[0] == count_on and result[1] == count_off:
@@ -75,3 +75,35 @@ def check_lights_test(grid, count_on, count_off):
             print("You have an error in your check lights test")
     except: 
         print("You have an error in your check lights test")
+
+####################################################
+#test calls
+
+#parse_file_test()
+
+#sample data
+sample_grid = {'0, 0': False, '0, 1': False, '0, 2': False, '0, 3': False, '0, 4': False, 
+               '1, 0': False, '1, 1': False, '1, 2': False, '1, 3': False, '1, 4': False,
+               '2, 0': False, '2, 1': False, '2, 2': False, '2, 3': False, '2, 4': False, 
+               '3, 0': False, '3, 1': False, '3, 2': False, '3, 3': False, '3, 4': False, 
+               '4, 0': False, '4, 1': False, '4, 2': False, '4, 3': False, '4, 4': False}
+sample_line_1 = "turn on 0, 0 through 3, 3"
+sample_coordinates = ('0, 0', '0, 1', '0, 2', '0, 3','1, 0', '1, 1', '1, 2', '1, 3',
+                      '2, 0', '2, 1', '2, 2', '2, 3', '3, 0', '3, 1', '3, 2', '3, 3')
+sample_grid_33 = {'0, 0': True, '0, 1': True, '0, 2': True, '0, 3': True, '0, 4': False, 
+                  '1, 0': True, '1, 1': True, '1, 2': True, '1, 3': True, '1, 4': False,
+                  '2, 0': True, '2, 1': True, '2, 2': True, '2, 3': True, '2, 4': False, 
+                  '3, 0': True, '3, 1': True, '3, 2': True, '3, 3': True, '3, 4': False, 
+                  '4, 0': False, '4, 1': False, '4, 2': False, '4, 3': False, '4, 4': False}
+lights_on_sample = ['0, 0', '0, 1', '0, 2', '0, 3', '1, 0', '1, 1', '1, 2', '1, 3', '2, 0', '2, 1', 
+                    '2, 2', '2, 3', '3, 0', '3, 1', '3, 2', '3, 3']
+lights_off_sample = ['0, 4', '1, 4', '2, 4', '3, 4', '4, 0', '4, 1', '4, 2', '4, 3', '4, 4']
+
+#test calls
+#create grid
+create_grid_test(sample_grid, 25)
+#parse commands
+parse_command_test(sample_line_1, "turn on", sample_coordinates)
+execute_command_test("turn on", sample_coordinates, sample_grid_33)
+count_lights_test(sample_grid_33, 16)
+check_lights_test(sample_grid_33, lights_on_sample, lights_off_sample)
