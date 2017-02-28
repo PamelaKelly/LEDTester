@@ -16,15 +16,15 @@ def parse_file_test(file, commands_list, grid_size):
 
 #test 2 - does the program correctly identify and implement the grid size.
 
-def create_grid_test(grid, size):
+def create_grid_test(grid_size, grid):
     try: 
-        result = lightswitch.main.create_grid()
-        if result == grid and result.length() == size: 
+        result = main.create_grid(grid_size)
+        if result == grid: 
             print("Grid Size Test Passed")
         else:
-            print("You have an error in your get grid size function")
+            print("You have an error in your create grid function")
     except: 
-        print("You have an error in your get grid size function")
+        print("You have an error in your create grid function")
 
 #test 3 - does the program read commands correctly. 
 
@@ -40,16 +40,15 @@ def parse_command_test(line, command, coordinates):
 
 #test 4 - does the program implement the commands correctly. 
 
-def execute_command_test(command, coordinates, output):
+def execute_command_test(start_grid, command, coordinates, output):
     try: 
-        result = lightswitch.main.execute_command(command, coordinates)
+        result = lightswitch.main.execute_command(start_grid, command, coordinates)
         if result == output: 
             print("Execute Commands Test Passed")
         else: 
             print("You have an error in your execute commands test")
     except: 
         print("You have an error in your execute commands test")
-
 
 #test 5 - does the program count the number of lights on correctly. 
 
@@ -90,8 +89,8 @@ sample_grid = {'0, 0': False, '0, 1': False, '0, 2': False, '0, 3': False, '0, 4
                '3, 0': False, '3, 1': False, '3, 2': False, '3, 3': False, '3, 4': False, 
                '4, 0': False, '4, 1': False, '4, 2': False, '4, 3': False, '4, 4': False}
 sample_line_1 = "turn on 0, 0 through 3, 3"
-sample_coordinates = ('0, 0', '0, 1', '0, 2', '0, 3','1, 0', '1, 1', '1, 2', '1, 3',
-                      '2, 0', '2, 1', '2, 2', '2, 3', '3, 0', '3, 1', '3, 2', '3, 3')
+sample_coordinates = ['0, 0', '0, 1', '0, 2', '0, 3','1, 0', '1, 1', '1, 2', '1, 3',
+                      '2, 0', '2, 1', '2, 2', '2, 3', '3, 0', '3, 1', '3, 2', '3, 3']
 sample_grid_33 = {'0, 0': True, '0, 1': True, '0, 2': True, '0, 3': True, '0, 4': False, 
                   '1, 0': True, '1, 1': True, '1, 2': True, '1, 3': True, '1, 4': False,
                   '2, 0': True, '2, 1': True, '2, 2': True, '2, 3': True, '2, 4': False, 
@@ -104,9 +103,12 @@ lights_off_sample = ['0, 4', '1, 4', '2, 4', '3, 4', '4, 0', '4, 1', '4, 2', '4,
 #test calls
 parse_file_test(sample_file, sample_commands_list, sample_grid_size)
 #create grid
-create_grid_test(sample_grid, 25)
+create_grid_test(4, sample_grid)
 #parse commands
 parse_command_test(sample_line_1, "turn on", sample_coordinates)
-execute_command_test("turn on", sample_coordinates, sample_grid_33)
+#execute commands
+execute_command_test(sample_grid, "turn on", sample_coordinates, sample_grid_33)
+#count lights
 count_lights_test(sample_grid_33, 16)
+#check lights/grid status
 check_lights_test(sample_grid_33, lights_on_sample, lights_off_sample)
