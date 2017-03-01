@@ -113,10 +113,7 @@ def lightswitch():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', help='input help')
     args = parser.parse_args()
-    print(args)
     file = args.input
-    print(file)
-    print(type(file))
     try:
         file_info = validate_file(file)
         file = file_info[0]
@@ -129,7 +126,7 @@ def lightswitch():
             command_key, coordinates = command_full[0], command_full[1]
             grid_updated = execute_command(start_grid, command_key, coordinates)
         num_lights_on = count_lights(grid_updated)
-        print(file, num_lights_on)
+        print(args.input, num_lights_on)
         return num_lights_on
     except: 
         print("Error - please check inputs and try again")
