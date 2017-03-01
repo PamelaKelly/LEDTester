@@ -129,9 +129,9 @@ def lightswitch():
         return num_lights_on
     except: 
         print("Error - please check inputs and try again")
-file1 = "c:/Users/pamel/Anaconda3/envs/comp30670/workspace/assignment3-PamelaKelly/src/tests/file1.txt"
-grid_count_1 = lightswitch(file1)
-print("File Name: ", file1, "Light Count: ", grid_count_1)
+#file1 = "c:/Users/pamel/Anaconda3/envs/comp30670/workspace/assignment3-PamelaKelly/src/tests/file1.txt"
+#grid_count_1 = lightswitch(file1)
+#print("File Name: ", file1, "Light Count: ", grid_count_1)
 
 #file2 = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt"
 #grid_count_2 = lightswitch(file2)
