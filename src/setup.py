@@ -9,6 +9,6 @@ setup(name='lightswitch',
       license = 'GNU',
       packages = ['lightswitch', 'tests'],
       entry_points = {
-          'console_scripts': ['lightswitch=assignment3-PamelaKelly.lightswitch.main:main']
+          'console_scripts': ['lightswitch=lightswitch.main:main']
           }
       )
