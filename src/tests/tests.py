@@ -134,6 +134,8 @@ count_lights_test(sample_grid_33, 16)
 #check lights/grid status
 check_lights_test(sample_grid_33, lights_on_sample, lights_off_sample)
 #check lightswitch function
+#This was written for the inital functionality of the program - it doesn't pass the test now because the argument 
+#is taken from the command line and the actual function takes no arguments. 
 lightswitch_test(sample_file, sample_num_lights_on)
 #with file given 
 lightswitch_test(sample_file2, sample_num_2)

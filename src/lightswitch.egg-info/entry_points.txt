@@ -1,0 +1,3 @@
+[console_scripts]
+lightswitch = lightswitch.main:lightswitch
+

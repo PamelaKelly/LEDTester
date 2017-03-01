@@ -113,7 +113,10 @@ def lightswitch():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', help='input help')
     args = parser.parse_args()
+    print(args)
     file = args.input
+    print(file)
+    print(type(file))
     try:
         file_info = validate_file(file)
         file = file_info[0]
@@ -126,17 +129,9 @@ def lightswitch():
             command_key, coordinates = command_full[0], command_full[1]
             grid_updated = execute_command(start_grid, command_key, coordinates)
         num_lights_on = count_lights(grid_updated)
+        print(file, num_lights_on)
         return num_lights_on
     except: 
         print("Error - please check inputs and try again")
-#file1 = "c:/Users/pamel/Anaconda3/envs/comp30670/workspace/assignment3-PamelaKelly/src/tests/file1.txt"
-#grid_count_1 = lightswitch(file1)
-#print("File Name: ", file1, "Light Count: ", grid_count_1)
 
-#file2 = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt"
-#grid_count_2 = lightswitch(file2)
-#print("File Name: ", file2, "Light Count: ", grid_count_2)
 
-file3 = "input_assign3_b_v2.txt"
-#grid_count_3 = lightswitch(file3)
-#print("File Name: ", file3, "Light Count: ", grid_count_3)
