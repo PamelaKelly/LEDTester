@@ -74,10 +74,12 @@ def check_lights_test(grid, list_on, list_off):
     except: 
         print("You have an error in your check lights test")
 
-def lightswitch_test(file, grid_updated, num_lights_on, lights_on, lights_off):
+def lightswitch_test(file, num_lights_on):
     try:
         result = main.lightswitch(file)
-        if result[0] == grid_updated and result[1] == num_lights_on and result[2] == lights_on and result[3] == lights_off:
+        print(result[1])
+        print(num_lights_on)
+        if result[1] == num_lights_on:
             print("Lightswitch Test Passed")
         else:
             print("You have an error in your Lightswitch function")
@@ -117,11 +119,8 @@ sample_grid_updated = {'0, 0': False, '0, 1': False, '0, 2': False, '0, 3': Fals
                        '3, 0': False, '3, 1': False, '3, 2': False, '3, 3': False, '3, 4': True, 
                        '4, 0': True, '4, 1': True, '4, 2': True, '4, 3': True, '4, 4': True}
 sample_num_lights_on = 9
-sample_lights_on = ['0, 4', '1, 4', '2, 4', '3, 4', '4, 0', '4, 1', '4, 2', '4, 3', '4, 4']
-sample_lights_off = ['0, 0', '0, 1', '0, 2', '0, 3', '1, 0', '1, 1', '1, 2', '1, 3',
-                    '2, 0', '2, 1', '2, 2', '2, 3',
-                    '3, 0', '3, 1', '3, 2', '3, 3']
-
+sample_file2 = "input_assign3.txt"
+sample_num_2 = 400410
 #test calls
 parse_file_test(sample_file, sample_commands_list, sample_grid_size)
 #create grid
@@ -135,4 +134,7 @@ count_lights_test(sample_grid_33, 16)
 #check lights/grid status
 check_lights_test(sample_grid_33, lights_on_sample, lights_off_sample)
 #check lightswitch function
-lightswitch_test(sample_file, sample_grid_updated, sample_num_lights_on, sample_lights_on, sample_lights_off)
+lightswitch_test(sample_file, sample_num_lights_on)
+#with file given 
+lightswitch_test(sample_file2, sample_num_2)
+

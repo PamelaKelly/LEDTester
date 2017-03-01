@@ -1,16 +1,41 @@
-import os
-    
-def parse_file(file):
-    os.chdir('../tests')
+import urllib.request, os.path, argparse
+
+def validate_file(file):
+    try:
+        if file.startswith('http'):
+            response = urllib.request.urlopen(file)
+            file = response.read().decode("utf-8")
+            file_type = 'link'
+        else:
+            if os.path.isfile(file):
+                file = file
+                file_type = 'local_file'
+            else:
+                print("Error: File Not Found - Check that you entered the correct file path")
+                return None
+        return file, file_type
+    except:
+        print("Error: Invalid File")
+
+def parse_file(file, file_type):
     command_list = []
-    fh = open(file)
-    grid_size = fh.readline().strip()
-    while True: 
-        line = fh.readline()
-        if not line: 
-            break
-        if ("turn" and "on" in line) or ("turn" and "off" in line) or ("switch" in line):
-            command_list.append(line.strip())
+    if file_type == 'local_file':
+        fh = open(file)
+        grid_size = fh.readline().strip()
+    
+        while True: 
+            line = fh.readline()
+            if not line: 
+                break
+            if ("turn" and "on" in line) or ("turn" and "off" in line) or ("switch" in line):
+                command_list.append(line.strip())
+    elif file_type == 'link':
+        lines = file.split('\n')
+        grid_size = lines[0]
+        lines.pop(0)
+        for line in lines:
+            if line != "":
+                command_list.append(line.strip())
     return command_list, grid_size
 
 def create_grid(grid_size):
@@ -63,8 +88,6 @@ def execute_command(start_grid, command, coordinates):
                 grid[c] = False
             else:
                 grid[c] = True
-    #should return a new dictionary with changes made to specific coordinates
-    #in the overall program this might need to be a global variable
     return grid
 
 def count_lights(grid):
@@ -73,7 +96,8 @@ def count_lights(grid):
         if grid[elem] == True:
             lights_on += 1
     return lights_on
-
+#didn't end up using this function but it could be useful if someone wanted
+#to check that the correct lights were on as well as the number of lights
 def check_lights(grid):
     lights_on = []
     lights_off = []
@@ -84,17 +108,35 @@ def check_lights(grid):
             lights_off.append(elem)
     return lights_on, lights_off
 
-def lightswitch(file):
-    grid_info = parse_file(file)
-    commands_lines, grid_size = grid_info[0], int(grid_info[1])
-    start_grid = create_grid(grid_size)
-    for line in commands_lines:
-        command_full = parse_command(line, grid_size)
-        command_key, coordinates = command_full[0], command_full[1]
-        grid_updated = execute_command(start_grid, command_key, coordinates)
-    num_lights_on = count_lights(grid_updated)
-    lights_check_detail = check_lights(grid_updated)
-    lights_on = lights_check_detail[0]
-    lights_off = lights_check_detail[1]
-    return grid_updated, num_lights_on, lights_on, lights_off
+def lightswitch():
+    #parse command line argument
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input', help='input help')
+    args = parser.parse_args()
+    file = args.input
+    try:
+        file_info = validate_file(file)
+        file = file_info[0]
+        file_type = file_info[1]
+        grid_info = parse_file(file, file_type)
+        commands_lines, grid_size = grid_info[0], int(grid_info[1])
+        start_grid = create_grid(grid_size)
+        for line in commands_lines:
+            command_full = parse_command(line, grid_size)
+            command_key, coordinates = command_full[0], command_full[1]
+            grid_updated = execute_command(start_grid, command_key, coordinates)
+        num_lights_on = count_lights(grid_updated)
+        return num_lights_on
+    except: 
+        print("Error - please check inputs and try again")
+file1 = "c:/Users/pamel/Anaconda3/envs/comp30670/workspace/assignment3-PamelaKelly/src/tests/file1.txt"
+grid_count_1 = lightswitch(file1)
+print("File Name: ", file1, "Light Count: ", grid_count_1)
 
+#file2 = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt"
+#grid_count_2 = lightswitch(file2)
+#print("File Name: ", file2, "Light Count: ", grid_count_2)
+
+file3 = "input_assign3_b_v2.txt"
+#grid_count_3 = lightswitch(file3)
+#print("File Name: ", file3, "Light Count: ", grid_count_3)
