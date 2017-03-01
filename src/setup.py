@@ -7,6 +7,5 @@ setup(name='lightswitch',
       author_email = 'pamela.kelly@ucdconnect.ie',
       url='https://github.com/ucd2017comp30670/assignment3-PamelaKelly',
       license = 'GNU',
-      packages = ['lightswitch', 'tests'],
-      commands = ['--input', 'input help']
+      packages = ['lightswitch', 'tests']
       )
