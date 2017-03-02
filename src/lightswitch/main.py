@@ -172,7 +172,6 @@ def lightswitch():
     Returns the name of the file, and the number of lights on.
     """
     #parse command line argument
-    print("We are running the correct version!!")
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', help='input help')
     args = parser.parse_args()
