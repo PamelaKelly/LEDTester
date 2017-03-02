@@ -39,3 +39,7 @@ Execute the commands.
 
 Step 5: 
 Check the number of lights that are on or off. Check which specific lights are on or off. 
+
+Notes on design and complexity: 
+
+

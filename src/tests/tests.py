@@ -5,6 +5,10 @@ from lightswitch import main
 #test 1 - does the program access the file correctly. 
 
 def parse_file_test(file, commands_list, grid_size):
+    """
+    Function to test the function parse_file in the
+    lightswitch package
+    """
     try: 
         result = main.parse_file(file)
         if result[0] == commands_list and result[1] == grid_size:
@@ -17,6 +21,10 @@ def parse_file_test(file, commands_list, grid_size):
 #test 2 - does the program correctly identify and implement the grid size.
 
 def create_grid_test(grid_size, grid):
+    """
+    Function to test the create_grid function in the
+    lightswitch package. 
+    """
     try: 
         result = main.create_grid(grid_size)
         if result == grid: 
@@ -29,6 +37,10 @@ def create_grid_test(grid_size, grid):
 #test 3 - does the program read commands correctly. 
 
 def parse_command_test(line, grid_size, command, coordinates):
+    """
+    Function to test the parse_command function in the
+    lightswitch package. 
+    """
     try: 
         result = lightswitch.main.parse_command(line, grid_size)
         if result[0] == command and result[1] == coordinates: 
@@ -41,6 +53,10 @@ def parse_command_test(line, grid_size, command, coordinates):
 #test 4 - does the program implement the commands correctly. 
 
 def execute_command_test(start_grid, command, coordinates, output):
+    """
+    Function to test the execute_command function in the
+    lightswitch package. 
+    """
     try: 
         result = lightswitch.main.execute_command(start_grid, command, coordinates)
         if result == output: 
@@ -53,6 +69,10 @@ def execute_command_test(start_grid, command, coordinates, output):
 #test 5 - does the program count the number of lights on correctly. 
 
 def count_lights_test(grid, count):
+    """
+    Function to test the count_lights function in the
+    lightswitch package. 
+    """
     try: 
         result = lightswitch.main.count_lights(grid)
         if result == count: 
@@ -65,6 +85,10 @@ def count_lights_test(grid, count):
 #test 6 - does the program correctly identify the lights that are on
 
 def check_lights_test(grid, list_on, list_off):
+    """
+    Function to test the check_lights function in the
+    lightswitch package. 
+    """
     try: 
         result = lightswitch.main.check_lights(grid)
         if result[0] == list_on and result[1] == list_off:
@@ -75,6 +99,12 @@ def check_lights_test(grid, list_on, list_off):
         print("You have an error in your check lights test")
 
 def lightswitch_test(file, num_lights_on):
+    """
+    Function to test the lightswitch function in the
+    lightswitch package. 
+    This test is no longer valid since introducing input
+    through the command line
+    """
     try:
         result = main.lightswitch(file)
         print(result[1])
@@ -133,10 +163,13 @@ execute_command_test(sample_grid, "turn on", sample_coordinates, sample_grid_33)
 count_lights_test(sample_grid_33, 16)
 #check lights/grid status
 check_lights_test(sample_grid_33, lights_on_sample, lights_off_sample)
+
+#################################################################################################
+
 #check lightswitch function
+
 #This was written for the inital functionality of the program - it doesn't pass the test now because the argument 
 #is taken from the command line and the actual function takes no arguments. 
 lightswitch_test(sample_file, sample_num_lights_on)
-#with file given 
 lightswitch_test(sample_file2, sample_num_2)
 
