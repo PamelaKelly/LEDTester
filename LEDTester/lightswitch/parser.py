@@ -32,12 +32,8 @@ class Parser():
     def parse_command(command):
         instruction = re.findall("([a-zA-Z]+\s([a-zA-z]+)?)", command)[0][0]
         match_coordinates = re.findall("\d,\d", command)
-        start_coordinate = [int(match_coordinates[0][0]), int(match_coordinates[0][2])]
-        end_coordinate = [int(match_coordinates[1][0]), int(match_coordinates[1][2])]
+        start_coordinates = [int(match_coordinates[0][0]), int(match_coordinates[0][2])]
+        end_coordinates = [int(match_coordinates[1][0]), int(match_coordinates[1][2])]
         
-        return instruction, start_coordinate, end_coordinate
-
-        
-Parser.parse_command("turn on 0,0 through 2,2")
-Parser.parse_command("switch 0,0 through 2,2")
+        return instruction, start_coordinates, end_coordinates
     

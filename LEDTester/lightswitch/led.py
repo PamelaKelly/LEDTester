@@ -1,8 +1,11 @@
+import numpy as np
+from numpy import *
+
 class LED():
     
-    def __init__(self):
-        self.__grid_size = 0
-        self.__grid = []
+    def __init__(self, grid_size):
+        self.__grid_size = grid_size
+        self.__grid = np.zeros((grid_size, grid_size), dtype = np.int)
         self.__lights_on = 0
         self.__lights_off = 0 # initialise as number of lights in the grid
         
@@ -10,53 +13,39 @@ class LED():
         return self.__grid    
     
     def get_status(self):
-        pass
+        return np.count_nonzero(self.__grid == 1)       
     
-    def get_light_status(self):
-        pass
+    def get_light_status(self, coordinates):
+        return self.__grid[coordinates[0], coordinates[1]]
     
-    def set_light_status(self):
-        pass
+    def set_light_status(self, action, coordinate):
+        current_status = self.__grid[coordinate[0], coordinate[1]]
+        if action == "turn on":
+            self.__grid[coordinate[0], coordinate[1]] = 1
+        elif action == "turn off":
+            self.__grid[coordinate[0], coordinate[1]] = 0
+        elif action == "switch":
+            if current_status == 0:
+                self.__grid[coordinate[0], coordinate[1]] = 1
+            else:
+                self.__grid[coordinate[0], coordinate[1]] = 0
+                
+    def update_grid(self, command, start, end):
+        row_limit, column_limit = self.check_range(start, end)
+        for row in range(row_limit):
+            for column in range(column_limit):
+                self.set_light_status(command, (row, column))
+        return self.__grid
     
-    @staticmethod
     def check_range(self, start_coordinates, end_coordinates):
-        lower_bound, upper_bound = 0, self.__grid_size - 1
-        # check x of start
-        if start_coordinates[0] < lower_bound:
-            start_coordinates[0] = lower_bound
-        elif  start_coordinates[0] > upper_bound:
-            start_coordinates[0] = upper_bound
-        # check y of start     
-        if start_coordinates[1] < lower_bound:
-            start_coordinates[1] = lower_bound
-        elif start_coordinates[1] > upper_bound:
-            start_coordinates[1] = upper_bound
-        # check x of end    
-        if end_coordinates[0] < lower_bound: 
-            end_coordinates[0] = lower_bound
-        elif end_coordinates[0] > upper_bound:
-            end_coordinates[0] = upper_bound
-        # check y of end
-        if end_coordinates[1] < lower_bound:
-            end_coordinates[1] = lower_bound
-        elif end_coordinates[1] > upper_bound:
-            end_coordinates[1] = upper_bound
-            
-        return start_coordinates, end_coordinates
-        """ Checks that a set of given coordinates are within the boundaries of the grid """
-                #check for coordinates outside grid boundaries    
-        """       
-        for i in range(len(xAxis)):
-            if int(xAxis[i]) < 0:
-                xAxis[i] = '0'
-            elif int(xAxis[i]) > grid_size - 1:
-                xAxis[i] = str(grid_size - 1)
-        for i in range(len(yAxis)):
-            if int(yAxis[i]) < 0:
-                yAxis[i] = '0'
-            elif int(yAxis[i]) > grid_size - 1:
-                yAxis[i] = str(grid_size - 1)
-    """
-        pass
-    
+        if end_coordinates[0] > self.__grid_size -1:
+            row_limit = self.__grid_size 
+        else: 
+            row_limit = end_coordinates[0] + 1
+        if end_coordinates[1] > self.__grid_size -1:
+            column_limit = self.__grid_size
+        else:
+            column_limit = end_coordinates[1] + 1
+        return row_limit, column_limit
+
     
