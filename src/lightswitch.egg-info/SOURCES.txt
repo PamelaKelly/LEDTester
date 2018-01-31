@@ -1,8 +1,0 @@
-lightswitch/__init__.py
-lightswitch/main.py
-lightswitch.egg-info/PKG-INFO
-lightswitch.egg-info/SOURCES.txt
-lightswitch.egg-info/dependency_links.txt
-lightswitch.egg-info/entry_points.txt
-lightswitch.egg-info/top_level.txt
-tests/tests.py
