@@ -1,13 +1,10 @@
 import numpy as np
-from numpy import *
 
 class LED():
     
     def __init__(self, grid_size):
         self.__grid_size = grid_size
         self.__grid = np.zeros((grid_size, grid_size), dtype = np.int)
-        self.__lights_on = 0
-        self.__lights_off = 0 # initialise as number of lights in the grid
         
     def get_grid(self):
         return self.__grid    
@@ -37,7 +34,7 @@ class LED():
                 self.set_light_status(command, (row, column))
         return self.__grid
     
-    def check_range(self, start_coordinates, end_coordinates):
+    def check_range(self, end_coordinates):
         if end_coordinates[0] > self.__grid_size -1:
             row_limit = self.__grid_size 
         else: 
