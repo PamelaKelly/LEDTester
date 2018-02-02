@@ -1,6 +1,7 @@
 import urllib.request, os.path, argparse
 
 def main():
+    """ Top level function which runs the program. """
     #parse command line argument
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', help='input help')
