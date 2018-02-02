@@ -1,8 +1,8 @@
 from setuptools import setup
 
 setup(name='lightswitch',
-      version='0.1',
-      description='Program to test LED board',
+      version='0.2',
+      description='Program to send commands to LED board',
       author = 'Pamela Kelly',
       author_email = 'pamela.kelly@ucdconnect.ie',
       url='https://github.com/ucd2017comp30670/assignment3-PamelaKelly',
