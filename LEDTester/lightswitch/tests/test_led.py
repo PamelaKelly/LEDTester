@@ -13,11 +13,6 @@ class TestLed(unittest.TestCase):
     
     def test_get_status(self):
         self.assertEqual(self.__led.get_status(), 0)
-
-    def test_set_light_status(self):
-        self.__led.set_light_status("on", [0, 0, 2, 2])
-        self.__led.set_light_status("off", [0, 0, 1, 1])
-        self.__led.set_light_status("switch", [1, 1, 2, 2])
         
     def test_get_light_status(self):
         self.assertEqual(self.__led.get_light_status((0, 0)), 0)

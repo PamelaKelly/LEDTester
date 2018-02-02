@@ -72,7 +72,7 @@ class LED():
                 self.__grid[coordinates[0], coordinates[1]] = 0
         return self.__grid
                 
-    def update_grid(self, command, row, column):
+    def update_grid(self, command):
         """
         Function to update the grid across a range of lights given 
         a command, and a boundary for both the row and the 
@@ -89,10 +89,11 @@ class LED():
         @rtype: numpy matrix
         @return: updated led grid attribute 
         """
-        row_limit, column_limit = self.check_range(row, column)
+        instruction = command[0]     
+        row_limit, column_limit = self.check_range(command[2])
         for row in range(row_limit):
             for column in range(column_limit):
-                LED.__set_light_status(command, (row, column))
+                self.__set_light_status(instruction, [row, column])
         return self.__grid
     
     def check_range(self, end_coordinates):

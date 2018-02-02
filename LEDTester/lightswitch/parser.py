@@ -4,21 +4,7 @@ class Parser():
     """ A class which handles all parsing functionality. """
     
     @staticmethod
-    def parse_url(self, url):
-        """
-        A static function which retrieves the text of a url and parses it for the information
-        needed to set up the led grid. 
-        
-        @type url: string
-        @param url: a url link to the location of the data
-        
-        @rtype: list, integer
-        @return: a list of commands and a number defining the grid size. 
-        """
-        pass
-    
-    @staticmethod
-    def parse_file(self, filepath):
+    def parse_file(filepath):
         """
         A static function which parses the text of a given file for the information
         needed to set up the led grid. 
@@ -33,7 +19,7 @@ class Parser():
         command_list = []
         fh = open(filepath, 'r')
         # get the grid size from the first line
-        grid_size = fh.readline().strip()
+        grid_size = int(fh.readline().strip())
         
         while True: 
             line = fh.readline()
@@ -43,12 +29,12 @@ class Parser():
                 command = Parser.__parse_command(line)
                 command_list.append(command)
         
-        return command_list, grid_size
+        return [command_list, grid_size]
     
     @staticmethod
     def __parse_command(command):
         """
-        A static function which parses a line of text, extracting only the relevant information
+        A private function which parses a line of text, extracting only the relevant information
         needed for the command. 
         
         @type command: string
@@ -60,10 +46,11 @@ class Parser():
         each containing two numbers which represent the start and end of the range of 
         lights to be affected. 
         """
-        instruction = re.findall("([a-zA-Z]+\s([a-zA-z]+)?)", command)[0][0]
-        match_coordinates = re.findall("\d,\d", command)
-        start_coordinates = [int(match_coordinates[0][0]), int(match_coordinates[0][2])]
-        end_coordinates = [int(match_coordinates[1][0]), int(match_coordinates[1][2])]
-        
+        instruction = re.findall("([a-zA-Z]+\s([a-zA-z]+)?)", command)[0][0].strip()
+        match_coordinates = re.findall("[+-]?\d\d?,[+-]?\d\d?", command)
+        start = match_coordinates[0].split(',')
+        end = match_coordinates[1].split(',')
+        start_coordinates = [int(start[0]), int(start[1])]
+        end_coordinates = [int(end[0]), int(end[1])]        
         return [instruction, start_coordinates, end_coordinates]
     
